@@ -12,11 +12,3 @@ channels:
   # channel to push to and the second element is the label on that channel
   targets:
     - ["adrianchia", "main"]
-# Needed for ci_support
-# xref https://github.com/conda-forge/conda-smithy/issues/957#issuecomment-445305081
-channel_sources:
-  - adrianchia,conda-forge,defaults
-
-# Needed for ci_support
-channel_targets:
-  - adrianchia main

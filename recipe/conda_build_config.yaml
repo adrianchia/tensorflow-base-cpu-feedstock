@@ -1,2 +1,10 @@
 MACOSX_DEPLOYMENT_TARGET:  # [osx]
   - '10.12'                # [osx]
+# Needed for ci_support
+# xref https://github.com/conda-forge/conda-smithy/issues/957#issuecomment-445305081
+channel_sources:
+  - adrianchia,conda-forge,defaults
+
+# Needed for ci_support
+channel_targets:
+  - adrianchia main
