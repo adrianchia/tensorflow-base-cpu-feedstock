@@ -11,4 +11,12 @@ channels:
   # target is a list of 2-lists, where the first element is the 
   # channel to push to and the second element is the label on that channel
   targets:
-    - ["adrianchia", "test"]
+    - ["adrianchia", "main"]
+# Needed for ci_support
+# xref https://github.com/conda-forge/conda-smithy/issues/957#issuecomment-445305081
+channel_sources:
+  - adrianchia,conda-forge,defaults
+
+# Needed for ci_support
+channel_targets:
+  - adrianchia main
