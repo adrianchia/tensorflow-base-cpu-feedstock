@@ -1,0 +1,91 @@
+{% set version = "2.3.0" %}
+
+package:
+  name: tensorflow-base-cpu
+  version: {{version}}
+
+source:
+  url: https://github.com/tensorflow/tensorflow/archive/v{{version}}.tar.gz
+  fn: tensorflow-{{version}}.tar.gz
+  sha256: 2595a5c401521f20a2734c4e5d54120996f8391f00bb62a57267d930bce95350
+
+build:
+  number: 0
+  skip: True  # [py27]
+  skip: True  # [not x86_64]
+  skip: True  # [win and vc<14]
+  skip: True  # [py39]
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    # ref https://github.com/tensorflow/tensorflow/blob/v2.3.0/configure.py#L52
+    - bazel 3.1.0
+  host:
+    - posix  # [win]
+    - m2-patch  # [win]
+    - bazel  # [win]
+    - absl-py >=0.7.0
+    - astunparse 1.6.3
+    - gast 0.3.3
+    - google-pasta >=0.1.8
+    - grpcio >=1.8.6
+    - h5py
+    - keras-preprocessing >=1.1.0,<1.2
+    - numpy >=1.16.0,<1.19.0
+    - opt_einsum >=2.3.2
+    - pip
+    - protobuf >=3.9.2
+    - python
+    - setuptools
+    - scipy 1.4.1
+    - six >=1.12
+    - termcolor >=1.1.0
+    - wheel >=0.26
+    - wrapt >=1.11.1
+    - zlib
+  run:
+    - python
+    # pin_compatible here is just to be lazy and define the dep versions in only one place.  These
+    #    don't have binary compatibility issues.
+    - {{ pin_compatible('absl-py', max_pin=None) }}
+    - {{ pin_compatible('astunparse', max_pin='x.x.x') }}
+    - {{ pin_compatible('gast', max_pin='x.x.x') }}
+    - {{ pin_compatible('google-pasta', max_pin=None) }}
+    - {{ pin_compatible('grpcio', max_pin=None) }}
+    - {{ pin_compatible('h5py', max_pin='x.x') }}
+    - {{ pin_compatible('keras-preprocessing', max_pin=None) }}
+    - {{ pin_compatible('numpy') }}
+    - {{ pin_compatible('opt_einsum', max_pin=None)}}
+    - {{ pin_compatible('protobuf', max_pin=None) }}
+    - {{ pin_compatible('scipy', max_pin=None) }}
+    - {{ pin_compatible('six', max_pin=None) }}
+    - {{ pin_compatible('termcolor', max_pin=None) }}
+    - {{ pin_compatible('wrapt', max_pin=None) }}
+
+  test:
+    imports:
+      - tensorflow
+    commands:
+    # estimator_ckpt_converter requires tensorflow-estimator
+    #- estimator_ckpt_converter --help
+    - saved_model_cli --help
+    - tf_upgrade_v2 --help
+    {% if unix -%}
+    - tflite_convert --help
+    - toco --help
+    - toco_from_protos --help
+    {%- endif %}
+
+about:
+  home: http://tensorflow.org/
+  license: Apache 2.0
+  license_family: Apache
+  summary: TensorFlow is a machine learning library, base package contains only tensorflow.
+  description: |
+    TensorFlow provides multiple APIs.The lowest level API, TensorFlow Core
+    provides you with complete programming control.
+    Base package contains only tensorflow, not tensorflow-tensorboard.
+  dev_url: https://github.com/tensorflow/tensorflow
+  doc_url: https://www.tensorflow.org/get_started/get_started
+  doc_source_url: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/docs_src
