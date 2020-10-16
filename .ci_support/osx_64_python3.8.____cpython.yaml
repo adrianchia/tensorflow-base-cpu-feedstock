@@ -2,6 +2,12 @@ CONDA_BUILD_SYSROOT:
 - /opt/MacOSX10.10.sdk
 MACOSX_DEPLOYMENT_TARGET:
 - '10.12'
+absl_py:
+- '0.7'
+astunparse:
+- 1.6.3
+bazel:
+- 3.1.0
 c_compiler:
 - clang
 c_compiler_version:
@@ -14,20 +20,44 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '10'
+gast:
+- 0.3.3
+google_pasta:
+- 0.1.8
+grpcio:
+- '1.16'
+h5py:
+- 2.10.0
+keras_preprocessing:
+- 1.1.0
 macos_machine:
 - x86_64-apple-darwin13.4.0
+numpy:
+- '1.16'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
   zlib:
     max_pin: x.x
+protobuf:
+- 3.8.0
 python:
 - 3.8.* *_cpython
+setuptools:
+- '41.4'
+six:
+- '1.12'
 target_platform:
 - osx-64
+termcolor:
+- 1.1.0
+wrapt:
+- 1.11.2
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+- - python
+  - numpy
 zlib:
 - '1.2'
