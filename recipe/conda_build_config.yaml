@@ -8,3 +8,37 @@ channel_sources:
 # Needed for ci_support
 channel_targets:
   - adrianchia main
+
+absl_py:
+  - 0.7  # [py<38]
+  - 0.8.1  # [py==38]
+  - 0.10  # [py==39]
+astunparse:
+  - 1.6.3
+bazel:
+  - 3.1.0
+gast:
+  - 0.3.3
+google_pasta:
+  - 0.1.8
+grpcio:
+  - 1.8.6
+h5py:
+  - 2.10.0
+keras_preprocessing:
+  - 1.1.0
+numpy:
+  - 1.16
+protobuf:
+  - 3.8.0  # [py<38]
+  - 3.9.2  # [py==38]
+  - 3.13.0.1  # [py==39]
+setuptools:
+  - 41.4
+six:
+  - 1.12
+termcolor:
+  - 1.1.0
+wrapt:
+  - 1.11.2  # [py<38]
+  - 1.12.1  # [py>=38]

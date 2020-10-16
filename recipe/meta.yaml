@@ -20,29 +20,29 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     # ref https://github.com/tensorflow/tensorflow/blob/v2.3.0/configure.py#L52
-    - bazel 3.1.0
+    - bazel
   host:
     - posix  # [win]
     - m2-patch  # [win]
     - bazel  # [win]
-    - absl-py >=0.7.0
-    - astunparse 1.6.3
-    - gast 0.3.3
-    - google-pasta >=0.1.8
-    - grpcio >=1.8.6
+    - absl-py
+    - astunparse
+    - gast
+    - google-pasta
+    - grpcio
     - h5py
-    - keras-preprocessing >=1.1.0,<1.2
-    - numpy >=1.16.0,<1.19.0
-    - opt_einsum >=2.3.2
+    - keras-preprocessing
+    - numpy
+    - opt_einsum
     - pip
-    - protobuf >=3.9.2
+    - protobuf
     - python
     - setuptools
-    - scipy 1.4.1
-    - six >=1.12
-    - termcolor >=1.1.0
-    - wheel >=0.26
-    - wrapt >=1.11.1
+    - scipy
+    - six
+    - termcolor
+    - wheel
+    - wrapt
     - zlib
   run:
     - python
