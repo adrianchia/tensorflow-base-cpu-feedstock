@@ -22,7 +22,8 @@ gast:
 google_pasta:
   - 0.1.8
 grpcio:
-  - 1.8.6
+  - 1.16  # [py<38]
+  - 1.23  # [py==38]
 h5py:
   - 2.10.0
 keras_preprocessing:
