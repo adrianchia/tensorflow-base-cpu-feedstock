@@ -85,7 +85,7 @@ N_JOBS=$((N_JOBS+1))
 echo ""
 echo "Bazel will use ${N_JOBS} concurrent job(s)."
 echo ""
-BUILD_OPTS="$BUILD_OPTS ${N_JOBS}"
+BUILD_OPTS="$BUILD_OPTS --jobs ${N_JOBS}"
 
 
 # Python Settings
@@ -103,6 +103,7 @@ export TF_NEED_ROCM=0
 export TF_NEED_MPI=0
 export TF_DOWNLOAD_CLANG=0
 export TF_SET_ANDROID_WORKSPACE=0
+export TF_CONFIGURE_IOS=0
 
 ./configure
 

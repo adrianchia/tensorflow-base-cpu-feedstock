@@ -13,8 +13,19 @@ build:
   number: 0
   skip: True  # [py27]
   skip: True  # [not x86_64]
-  skip: True  # [win and vc<14]
+  skip: True  # [not osx]
   skip: True  # [py39]
+
+  entry_points:
+    - toco_from_protos = tensorflow.lite.toco.python.toco_from_protos:main
+    - tflite_convert = tensorflow.lite.python.tflite_convert:main
+    - toco = tensorflow.lite.python.tflite_convert:main
+    - saved_model_cli = tensorflow.python.tools.saved_model_cli:main
+    # The tensorboard package adds this entry point.
+    # - tensorboard = tensorboard.main:run_main
+    - tf_upgrade_v2 = tensorflow.tools.compatibility.tf_upgrade_v2_main:main
+    - estimator_ckpt_converter = tensorflow_estimator.python.estimator.tools.checkpoint_converter:main
+
 requirements:
   build:
     - {{ compiler('c') }}
@@ -32,7 +43,7 @@ requirements:
     - grpcio
     - h5py
     - keras-preprocessing
-    - numpy
+    - numpy <1.19
     - opt_einsum
     - pip
     - protobuf
@@ -48,20 +59,8 @@ requirements:
     - python
     # pin_compatible here is just to be lazy and define the dep versions in only one place.  These
     #    don't have binary compatibility issues.
-    - {{ pin_compatible('absl-py', max_pin=None) }}
-    - {{ pin_compatible('astunparse', max_pin='x.x.x') }}
-    - {{ pin_compatible('gast', max_pin='x.x.x') }}
-    - {{ pin_compatible('google-pasta', max_pin=None) }}
-    - {{ pin_compatible('grpcio', max_pin=None) }}
-    - {{ pin_compatible('h5py', max_pin='x.x') }}
-    - {{ pin_compatible('keras-preprocessing', max_pin=None) }}
-    - {{ pin_compatible('numpy') }}
-    - {{ pin_compatible('opt_einsum', max_pin=None)}}
-    - {{ pin_compatible('protobuf', max_pin=None) }}
-    - {{ pin_compatible('scipy', max_pin=None) }}
-    - {{ pin_compatible('six', max_pin=None) }}
-    - {{ pin_compatible('termcolor', max_pin=None) }}
-    - {{ pin_compatible('wrapt', max_pin=None) }}
+    - pip
+    - numpy >=1.16.0,<1.19
 
   test:
     imports:
