@@ -70,19 +70,29 @@ else
   ${BAZEL_MKL_OPT}
   --config=opt"
   export TF_ENABLE_XLA=1
+  export CC_OPT_FLAGS="-march=nocona -mtune=haswell"
 fi
 
 #if [[ ${HOST} =~ "2*" ]]; then
 #    BUILD_OPTS="$BUILD_OPTS --config=v2"
 #fi
 
+# multi-core build?
+# adapted from https://chromium.googlesource.com/external/github.com/tensorflow/tensorflow/+/refs/heads/master/tensorflow/tools/ci_build/osx/cpu/run_py3_cc_core.sh
+N_JOBS=$(sysctl -n hw.ncpu)
+N_JOBS=$((N_JOBS+1))
+
+echo ""
+echo "Bazel will use ${N_JOBS} concurrent job(s)."
+echo ""
+BUILD_OPTS="$BUILD_OPTS ${N_JOBS}"
+
+
 # Python Settings
 export PYTHON_BIN_PATH=${PYTHON}
 export PYTHON_LIB_PATH=${SP_DIR}
 export USE_DEFAULT_PYTHON_LIB_PATH=1
-
 # additional settings
-export CC_OPT_FLAGS="-march=nocona -mtune=haswell"
 export TF_NEED_OPENCL=0
 export TF_NEED_OPENCL_SYCL=0
 export TF_NEED_COMPUTECPP=0
