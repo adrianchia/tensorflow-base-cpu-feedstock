@@ -5,6 +5,10 @@ set -ex
 export TF_NEED_MKL=0
 export BAZEL_MKL_OPT=""
 export BAZEL_OPTS=""
+export  BUILD_OPTS="
+      --verbose_failures
+      --config=opt
+      --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0"
 
 if [[ $(uname) == Darwin ]]; then
 
@@ -42,10 +46,6 @@ if [[ $(uname) == Darwin ]]; then
   #    --verbose_failures
   #    ${BAZEL_MKL_OPT}
   #    --config=opt"
-  export CC_OPT_FLAGS="${CC_OPT_FLAGS:--march=native -Wno-sign-compare}"
-  BUILD_OPTS="
-      --verbose_failures
-      --config=opt"
   export TF_ENABLE_XLA=0
 else
   # Linux
@@ -57,6 +57,7 @@ else
   # Set compiler and linker flags as bazel does not account for CFLAGS,
   # CXXFLAGS and LDFLAGS.
   BUILD_OPTS="
+  ${BUILD_OPTS}
   --copt=-march=nocona
   --copt=-mtune=haswell
   --copt=-ftree-vectorize
@@ -67,11 +68,8 @@ else
   --cxxopt=-fmessage-length=0
   --linkopt=-zrelro
   --linkopt=-znow
-  --verbose_failures
-  ${BAZEL_MKL_OPT}
-  --config=opt"
+  ${BAZEL_MKL_OPT}"
   export TF_ENABLE_XLA=1
-  export CC_OPT_FLAGS="-march=nocona -mtune=haswell"
 fi
 
 #if [[ ${HOST} =~ "2*" ]]; then
@@ -94,6 +92,8 @@ export PYTHON_BIN_PATH=${PYTHON}
 export PYTHON_LIB_PATH=${SP_DIR}
 export USE_DEFAULT_PYTHON_LIB_PATH=1
 # additional settings
+# https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html
+export CC_OPT_FLAGS="-march=nocona -mtune=haswell" # haswell implies MOVBE, MMX, SSE, SSE2, SSE3, SSSE3, SSE4.1, SSE4.2, POPCNT, AVX, AVX2, AES, PCLMUL, FSGSBASE, RDRND, FMA, BMI, BMI2 and F16C
 export TF_NEED_OPENCL=0
 export TF_NEED_OPENCL_SYCL=0
 export TF_NEED_COMPUTECPP=0

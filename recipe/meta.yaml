@@ -13,7 +13,7 @@ build:
   number: 0
   skip: True  # [py27]
   skip: True  # [not x86_64]
-  skip: True  # [not osx]
+  skip: True  # [win]
   skip: True  # [py39]
 
   entry_points:
