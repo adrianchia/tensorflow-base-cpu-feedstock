@@ -6,7 +6,7 @@ export TF_NEED_MKL=0
 export BAZEL_MKL_OPT=""
 export BAZEL_OPTS=""
 
-if [[ ${HOST} =~ .*darwin.* ]]; then
+if [[ $(uname) == Darwin ]]; then
 
   # set up bazel config file for conda provided clang toolchain
   #cp -r ${RECIPE_DIR}/custom_clang_toolchain .
@@ -42,6 +42,7 @@ if [[ ${HOST} =~ .*darwin.* ]]; then
   #    --verbose_failures
   #    ${BAZEL_MKL_OPT}
   #    --config=opt"
+  export CC_OPT_FLAGS="${CC_OPT_FLAGS:--march=native -Wno-sign-compare}"
   BUILD_OPTS="
       --verbose_failures
       --config=opt"
