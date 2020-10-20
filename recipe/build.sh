@@ -47,6 +47,11 @@ if [[ $(uname) == Darwin ]]; then
   #    ${BAZEL_MKL_OPT}
   #    --config=opt"
   export TF_ENABLE_XLA=0
+
+  # multi-core build?
+  # adapted from https://chromium.googlesource.com/external/github.com/tensorflow/tensorflow/+/refs/heads/master/tensorflow/tools/ci_build/osx/cpu/run_py3_cc_core.sh
+  N_JOBS=$(sysctl -n hw.ncpu)
+  N_JOBS=$((N_JOBS+1))
 else
   # Linux
   # the following arguments are useful for debugging
@@ -70,16 +75,12 @@ else
   --linkopt=-znow
   ${BAZEL_MKL_OPT}"
   export TF_ENABLE_XLA=1
+  N_JOBS=$(grep -c ^processor /proc/cpuinfo)
 fi
 
 #if [[ ${HOST} =~ "2*" ]]; then
 #    BUILD_OPTS="$BUILD_OPTS --config=v2"
 #fi
-
-# multi-core build?
-# adapted from https://chromium.googlesource.com/external/github.com/tensorflow/tensorflow/+/refs/heads/master/tensorflow/tools/ci_build/osx/cpu/run_py3_cc_core.sh
-N_JOBS=$(sysctl -n hw.ncpu)
-N_JOBS=$((N_JOBS+1))
 
 echo ""
 echo "Bazel will use ${N_JOBS} concurrent job(s)."
