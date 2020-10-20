@@ -59,8 +59,20 @@ requirements:
     - python
     # pin_compatible here is just to be lazy and define the dep versions in only one place.  These
     #    don't have binary compatibility issues.
-    - pip
-    - numpy >=1.16.0,<1.19
+    - {{ pin_compatible('absl-py', max_pin=None) }}
+    - {{ pin_compatible('astunparse', max_pin='x.x.x') }}
+    - {{ pin_compatible('gast', max_pin='x.x.x') }}
+    - {{ pin_compatible('google-pasta', max_pin=None) }}
+    - {{ pin_compatible('grpcio', max_pin=None) }}
+    - {{ pin_compatible('h5py', max_pin='x.x') }}
+    - {{ pin_compatible('keras-preprocessing', max_pin=None) }}
+    - {{ pin_compatible('numpy') }}
+    - {{ pin_compatible('opt_einsum', max_pin=None)}}
+    - {{ pin_compatible('protobuf', max_pin=None) }}
+    - {{ pin_compatible('scipy', max_pin=None) }}
+    - {{ pin_compatible('six', max_pin=None) }}
+    - {{ pin_compatible('termcolor', max_pin=None) }}
+    - {{ pin_compatible('wrapt', max_pin=None) }}
 
   test:
     imports:
