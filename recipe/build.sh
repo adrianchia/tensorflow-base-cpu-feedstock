@@ -13,39 +13,40 @@ export  BUILD_OPTS="
 if [[ $(uname) == Darwin ]]; then
 
   # set up bazel config file for conda provided clang toolchain
-  #cp -r ${RECIPE_DIR}/custom_clang_toolchain .
-  #cd custom_clang_toolchain
-  #sed -e "s:\${CLANG}:${CLANG}:" \
-  #    -e "s:\${INSTALL_NAME_TOOL}:${INSTALL_NAME_TOOL}:" \
-  #    -e "s:\${CONDA_BUILD_SYSROOT}:${CONDA_BUILD_SYSROOT}:" \
-  #    cc_wrapper.sh.template > cc_wrapper.sh
-  #chmod +x cc_wrapper.sh
-  #sed -e "s:\${PREFIX}:${BUILD_PREFIX}:" \
-  #    -e "s:\${LD}:${LD}:" \
-  #    -e "s:\${NM}:${NM}:" \
-  #    -e "s:\${STRIP}:${STRIP}:" \
-  #    -e "s:\${LIBTOOL}:${LIBTOOL}:" \
-  #    -e "s:\${CONDA_BUILD_SYSROOT}:${CONDA_BUILD_SYSROOT}:" \
-  #    CROSSTOOL.template > CROSSTOOL
-  #cd ..
+  cp -r ${RECIPE_DIR}/custom_clang_toolchain .
+  cd custom_clang_toolchain
+  sed -e "s:\${CLANG}:${CLANG}:" \
+      -e "s:\${INSTALL_NAME_TOOL}:${INSTALL_NAME_TOOL}:" \
+      -e "s:\${CONDA_BUILD_SYSROOT}:${CONDA_BUILD_SYSROOT}:" \
+      cc_wrapper.sh.template > cc_wrapper.sh
+  chmod +x cc_wrapper.sh
+  sed -e "s:\${PREFIX}:${BUILD_PREFIX}:" \
+      -e "s:\${LD}:${LD}:" \
+      -e "s:\${NM}:${NM}:" \
+      -e "s:\${STRIP}:${STRIP}:" \
+      -e "s:\${LIBTOOL}:${LIBTOOL}:" \
+      -e "s:\${CONDA_BUILD_SYSROOT}:${CONDA_BUILD_SYSROOT}:" \
+      CROSSTOOL.template > CROSSTOOL
+  cd ..
 
   # set build arguments
-  #export  BAZEL_USE_CPP_ONLY_TOOLCHAIN=1
-  if [[ $(basename $CONDA_BUILD_SYSROOT) != "MacOSX10.12.sdk" ]]; then
-      echo "WARNING: You asked me to use $CONDA_BUILD_SYSROOT as the MacOS SDK"
-      echo "         But because of the use of Objective-C Generics we need at"
-      echo "         least MacOSX10.12.sdk"
-      CONDA_BUILD_SYSROOT=/opt/MacOSX10.12.sdk
-      if [[ ! -d $CONDA_BUILD_SYSROOT ]]; then
-        echo "ERROR: $CONDA_BUILD_SYSROOT is not a directory"
-        exit 1
-      fi
-    fi
-  #BUILD_OPTS="
-  #    --crosstool_top=//custom_clang_toolchain:toolchain
-  #    --verbose_failures
-  #    ${BAZEL_MKL_OPT}
-  #    --config=opt"
+  export  BAZEL_USE_CPP_ONLY_TOOLCHAIN=1
+  #if [[ $(basename $CONDA_BUILD_SYSROOT) != "MacOSX10.12.sdk" ]]; then
+  #    echo "WARNING: You asked me to use $CONDA_BUILD_SYSROOT as the MacOS SDK"
+  #    echo "         But because of the use of Objective-C Generics we need at"
+  #    echo "         least MacOSX10.12.sdk"
+  #    CONDA_BUILD_SYSROOT=/opt/MacOSX10.12.sdk
+  #    if [[ ! -d $CONDA_BUILD_SYSROOT ]]; then
+  #      echo "ERROR: $CONDA_BUILD_SYSROOT is not a directory"
+  #      exit 1
+  #    fi
+  #  fi
+  BUILD_OPTS="
+      --crosstool_top=//custom_clang_toolchain:toolchain
+      --verbose_failures
+      ${BAZEL_MKL_OPT}
+      --config=opt
+      --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0"
   export TF_ENABLE_XLA=0
 
   # multi-core build?

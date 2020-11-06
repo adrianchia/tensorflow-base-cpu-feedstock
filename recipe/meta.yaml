@@ -1,7 +1,7 @@
 {% set version = "2.3.0" %}
 
 package:
-  name: tensorflow-base-cpu
+  name: tensorflow
   version: {{version}}
 
 source:
@@ -59,20 +59,23 @@ requirements:
     - python
     # pin_compatible here is just to be lazy and define the dep versions in only one place.  These
     #    don't have binary compatibility issues.
-    - {{ pin_compatible('absl-py', max_pin=None) }}
-    - {{ pin_compatible('astunparse', max_pin='x.x.x') }}
-    - {{ pin_compatible('gast', max_pin='x.x.x') }}
-    - {{ pin_compatible('google-pasta', max_pin=None) }}
-    - {{ pin_compatible('grpcio', max_pin=None) }}
-    - {{ pin_compatible('h5py', max_pin='x.x') }}
-    - {{ pin_compatible('keras-preprocessing', max_pin=None) }}
-    - {{ pin_compatible('numpy') }}
-    - {{ pin_compatible('opt_einsum', max_pin=None)}}
-    - {{ pin_compatible('protobuf', max_pin=None) }}
-    - {{ pin_compatible('scipy', max_pin=None) }}
-    - {{ pin_compatible('six', max_pin=None) }}
-    - {{ pin_compatible('termcolor', max_pin=None) }}
-    - {{ pin_compatible('wrapt', max_pin=None) }}
+    - absl-py >=0.7.0
+    - astunparse >=1.6.3
+    - gast >=0.3.3
+    - google-pasta >=0.1.8
+    - grpcio >=1.8.6
+    - h5py >=2.10.0,<2.11.0
+    - keras-preprocessing >=1.1.1,<1.2
+    - numpy >=1.16.0,<1.19
+    - opt_einsum >=2.3.2
+    - protobuf >=3.9.2
+    - tensorboard >=2.3.0,<3
+    - tensorflow-estimator >=2.3.0,<2.4.0
+    - termcolor >=1.1.0
+    - wrapt >=1.11.1
+    - wheel >=0.26
+    - six >=1.12.0
+    - scipy
 
   test:
     imports:
