@@ -20,13 +20,13 @@ if [[ $(uname) == Darwin ]]; then
       -e "s:\${CONDA_BUILD_SYSROOT}:${CONDA_BUILD_SYSROOT}:" \
       cc_wrapper.sh.template > cc_wrapper.sh
   chmod +x cc_wrapper.sh
-  sed -e "s:\${PREFIX}:${BUILD_PREFIX}:" \
-      -e "s:\${LD}:${LD}:" \
-      -e "s:\${NM}:${NM}:" \
-      -e "s:\${STRIP}:${STRIP}:" \
-      -e "s:\${LIBTOOL}:${LIBTOOL}:" \
-      -e "s:\${CONDA_BUILD_SYSROOT}:${CONDA_BUILD_SYSROOT}:" \
-      CROSSTOOL.template > CROSSTOOL
+  sed -i "" "s:\${PREFIX}:${BUILD_PREFIX}:" cc_toolchain_config.bzl
+  sed -i "" "s:\${BUILD_PREFIX}:${BUILD_PREFIX}:" cc_toolchain_config.bzl
+  sed -i "" "s:\${CONDA_BUILD_SYSROOT}:${CONDA_BUILD_SYSROOT}:" cc_toolchain_config.bzl
+  sed -i "" "s:\${LD}:${LD}:" cc_toolchain_config.bzl
+  sed -i "" "s:\${NM}:${NM}:" cc_toolchain_config.bzl
+  sed -i "" "s:\${STRIP}:${STRIP}:" cc_toolchain_config.bzl
+  sed -i "" "s:\${LIBTOOL}:${LIBTOOL}:" cc_toolchain_config.bzl
   cd ..
 
   # set build arguments
@@ -48,6 +48,7 @@ if [[ $(uname) == Darwin ]]; then
       --config=opt
       --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0"
   export TF_ENABLE_XLA=0
+  export TF_CONFIGURE_IOS=0
 
   # multi-core build?
   # adapted from https://chromium.googlesource.com/external/github.com/tensorflow/tensorflow/+/refs/heads/master/tensorflow/tools/ci_build/osx/cpu/run_py3_cc_core.sh
@@ -106,7 +107,6 @@ export TF_NEED_ROCM=0
 export TF_NEED_MPI=0
 export TF_DOWNLOAD_CLANG=0
 export TF_SET_ANDROID_WORKSPACE=0
-export TF_CONFIGURE_IOS=0
 
 ./configure
 

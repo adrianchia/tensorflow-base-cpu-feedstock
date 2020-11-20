@@ -1,5 +1,5 @@
-About tensorflow-base-cpu
-=========================
+About tensorflow
+================
 
 Home: http://tensorflow.org/
 
@@ -90,43 +90,43 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-tensorflow--base--cpu-green.svg)](https://anaconda.org/adrianchia/tensorflow-base-cpu) | [![Conda Downloads](https://img.shields.io/conda/dn/adrianchia/tensorflow-base-cpu.svg)](https://anaconda.org/adrianchia/tensorflow-base-cpu) | [![Conda Version](https://img.shields.io/conda/vn/adrianchia/tensorflow-base-cpu.svg)](https://anaconda.org/adrianchia/tensorflow-base-cpu) | [![Conda Platforms](https://img.shields.io/conda/pn/adrianchia/tensorflow-base-cpu.svg)](https://anaconda.org/adrianchia/tensorflow-base-cpu) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-tensorflow-green.svg)](https://anaconda.org/adrianchia/tensorflow) | [![Conda Downloads](https://img.shields.io/conda/dn/adrianchia/tensorflow.svg)](https://anaconda.org/adrianchia/tensorflow) | [![Conda Version](https://img.shields.io/conda/vn/adrianchia/tensorflow.svg)](https://anaconda.org/adrianchia/tensorflow) | [![Conda Platforms](https://img.shields.io/conda/pn/adrianchia/tensorflow.svg)](https://anaconda.org/adrianchia/tensorflow) |
 
-Installing tensorflow-base-cpu
-==============================
+Installing tensorflow
+=====================
 
-Installing `tensorflow-base-cpu` from the `adrianchia` channel can be achieved by adding `adrianchia` to your channels with:
+Installing `tensorflow` from the `adrianchia` channel can be achieved by adding `adrianchia` to your channels with:
 
 ```
 conda config --add channels adrianchia
 ```
 
-Once the `adrianchia` channel has been enabled, `tensorflow-base-cpu` can be installed with:
+Once the `adrianchia` channel has been enabled, `tensorflow` can be installed with:
 
 ```
-conda install tensorflow-base-cpu
+conda install tensorflow
 ```
 
-It is possible to list all of the versions of `tensorflow-base-cpu` available on your platform with:
+It is possible to list all of the versions of `tensorflow` available on your platform with:
 
 ```
-conda search tensorflow-base-cpu --channel adrianchia
+conda search tensorflow --channel adrianchia
 ```
 
 
 
 
-Updating tensorflow-base-cpu-feedstock
-======================================
+Updating tensorflow-feedstock
+=============================
 
-If you would like to improve the tensorflow-base-cpu recipe or build a new
+If you would like to improve the tensorflow recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `adrianchia` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `adrianchia` channel.
-Note that all branches in the conda-forge/tensorflow-base-cpu-feedstock are
+Note that all branches in the conda-forge/tensorflow-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
